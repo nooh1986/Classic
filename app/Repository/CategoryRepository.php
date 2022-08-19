@@ -2,16 +2,16 @@
 
 namespace App\Repository;
 
-use App\Interfaces\CustomerRepositoryInterface;
-use App\Models\Customer;
+use App\Interfaces\CategoryRepositoryInterface;
+use App\Models\Category;
 
-class CustomerRepository implements CustomerRepositoryInterface 
+class CategoryRepository implements CategoryRepositoryInterface 
 {
 
     public function index()
     {
-        $customers = Customer::orderBy('name' , 'ASC')->get();
-        return view('customers.index' , compact('customers'));
+        $categories = Category::orderBy('name' , 'ASC')->get();
+        return view('categories.index' , compact('categories'));
     }
 
     public function store($request)
@@ -19,12 +19,11 @@ class CustomerRepository implements CustomerRepositoryInterface
         try
         {
             $data['name']   = $request->name;
-            $data['number'] = $request->number;
-                       
-            Customer::create($data);
+                                   
+            Category::create($data);
 
             session()->flash('create');
-            return redirect()->route('customers.index');
+            return redirect()->route('categories.index');
         }
         catch (\Exception $e)
         {
@@ -36,14 +35,13 @@ class CustomerRepository implements CustomerRepositoryInterface
     {
         try
         {
-            $customer = Customer::findorfail($request->id);
+            $customer = Category::findorfail($request->id);
 
             $data['name']   = $request->name;
-            $data['number'] = $request->number;
             $customer->update($data);
 
             session()->flash('edit');
-            return redirect()->route('customers.index');
+            return redirect()->route('categories.index');
         }
         catch (\Exception $e)
         {
@@ -55,10 +53,10 @@ class CustomerRepository implements CustomerRepositoryInterface
     {
         try
         {
-            Customer::findorfail($request->id)->delete();
+            Category::findorfail($request->id)->delete();
 
             session()->flash('delete');
-            return redirect()->route('customers.index');
+            return redirect()->route('categories.index');
         }
         catch (\Exception $e)
         {

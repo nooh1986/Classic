@@ -3,7 +3,7 @@
             <button aria-label="Close" class="close" data-dismiss="alert" type="button">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <strong>{{trans('backend/validation.wrong')}}</strong>
+            <strong>خطا</strong>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -13,11 +13,11 @@
     @endif
 
 
-    @if (session()->has('add'))
+    @if (session()->has('create'))
         <script>
             window.onload = function() {
                 notif({
-                    msg: "{{ trans('backend/messages.add') }}",
+                    msg: "تم حفظ البيانات بنجاح",
                     type: "success"
                 });
             }
@@ -28,7 +28,7 @@
         <script>
             window.onload = function() {
                 notif({
-                    msg: "{{ trans('backend/messages.edit') }}",
+                    msg: "تم تعديل البيانات بنجاح",
                     type: "success"
                 });
             }
@@ -39,8 +39,8 @@
         <script>
             window.onload = function() {
                 notif({
-                    msg: "{{ trans('backend/messages.delete') }}",
-                    type: "success"
+                    msg: "تم حذف البيانات بنجاح",
+                    type: "danger"
                 });
             }
         </script>
